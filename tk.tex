@@ -1,0 +1,309 @@
+\documentclass{article}
+\usepackage[ukrainian,english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage{amsmath}
+
+\title{Експериментальна робота №5 \\
+з курсу „Теорiя керування” \\
+студента 3-го курсу групи ОМ \\
+Гаврилка Євгенія}
+\date{2017-05-26}
+%\author{Гаврилко Євгеній}
+\begin{document}
+
+\maketitle
+\newpage
+\section{Опис математичної моделi i постановка задачi}
+\subsection{Модель бойових дiй двох армiй}
+Нехай в протиборствi беруть участь як регулярнi армiї, так i парти-
+занськi об’єднання. Головною характеристикою суперникiв є чисельнiсть
+сторiн $N_1(t) \geq 0$, $N_2(t) \geq 0$. У випадку дiй мiж регулярними частинами
+динамiка їх чисельностi визначається факторами:
+1). Швидкiсть зменшення особового складу за причинами, не зв’я-
+заними безпосередньо з бойовими дiями: хвороби, травми, дезертирство;
+2). Темп втрат обумовлений бойовими дiями; 3). Швидкiсть надання пiд-
+крiплення, що вважається деякою функцiєю вiд часу.
+При цих припущеннях для $N_1 (t)$, $N_2 (t)$ отримуємо систему диферен-
+цiальних рiвнянь
+
+\begin{equation}
+{\frac {\rm d}{{\rm d}t}}N_1(t) = -a_1(t) N_1(t) - b_2(t) N_2(t) + g_1(t)
+\end{equation}
+\begin{equation}
+{\frac {\rm d}{{\rm d}t}}N_2(t) = -b_1(t) N_1(t) - a_2(t) N_2(t) + g_2(t)
+\end{equation}
+
+Тут неперервнi функцiї $a_i(t) \geq  0$ визначають швидкiсть втрат у силу
+причин, що не пов’язанi з бойовими дiями, неперервнi функцiї $b_i(t) \geq  0$
+показують темпи втрат через бойовi дiї супротивника, неперервнi фун-
+кцiї $g_i(t)$ показують темп надання пiдкрiплення (модель Ланчестера).
+
+\subsection{Постановка задачі}
+Розглядається система керування (1), (2), в якiй $g_1 (t), g_2(t)$ - функцiї керування,
+$t \in [0, T]$, $a_1 (t) = a_1$, $a_2(t) = a_2$, $b_1 (t) = b_1$, $b_2 (t) = b_2$ - додатнi константи.
+
+Побудувати множину досяжностi в момент $T > 0$ за умови, що обме-
+ження на початковий стан задається нерiвностями
+
+\begin{equation}
+0\leq N_1\leq \alpha 
+\end{equation}
+\begin{equation}
+0\leq N_2\leq \beta
+\end{equation}
+а обмеження на керування мають вигляд
+\begin{equation}
+-h_1\leq g_1(t)\leq h_1
+\end{equation}
+\begin{equation}
+-h_2\leq g_2(t)\leq h_2
+\end{equation}
+де $\alpha, \beta, h1, h2$ – додатнi константи.
+\section{Математичні викладки}
+
+З теорії відомо, що система (1), (2) за умов (5), (6) є стандарною задачею множини досяжностi лiнiйної системи керування, яка може бути обчислена за формулою
+
+\begin{equation}
+X(t, M_0) = \Theta (t, t_0) M_0 +\int_{t_0}^t \Theta (t, s) B(s)U(s)\mathrm{d}s
+\end{equation}
+ 
+\begin{equation}
+{\frac {\rm d}{{\rm d}t}}x \left( t \right) =-a_{{1}}x
+ \left( t \right) -b_{{2}}y \left( t \right)
+\end{equation}
+\begin{equation}
+ {\frac {\rm d}{{\rm d}t}
+}y \left( t \right) =-b_{{1}}x \left( t \right) -a_{{2}}y \left( t
+ \right)
+\end{equation}
+
+де $\Theta(t, s) = A (t) \Theta (t, s)$, $\Theta (s, s) = I$
+
+Тут у позначеннях постанови задачі:
+\begin{equation}
+A(t) = A = 
+\begin{bmatrix}
+    -a_{1} & -b_{2}\\
+    -b_{1} & -a_{2}
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+B(t) = B = 
+\begin{bmatrix}
+    1 & 0\\
+    0 & 1
+\end{bmatrix}
+\end{equation}
+
+Очислемо матрицю $\Theta$:
+
+\begin{equation}
+\Theta \left( t,s \right) = \left[ \begin {array}{cc} {\frac {p_{{1}}{
+{\rm e}^{q_{{2}} \left( s-t \right) }}+{{\rm e}^{q_{{1}} \left( s-t
+ \right) }}p_{{2}}}{{k}^{2}}}&{\frac {b_{{2}} \left( -{{\rm e}^{q_{{2}
+} \left( s-t \right) }}+{{\rm e}^{q_{{1}} \left( s-t \right) }}
+ \right) }{{k}^{2}}}\\ \noalign{\medskip}{\frac {p_{{1}}p_{{2}}
+ \left( -{{\rm e}^{q_{{2}} \left( s-t \right) }}+{{\rm e}^{q_{{1}}
+ \left( s-t \right) }} \right) }{{k}^{2}b_{{2}}}}&{\frac {p_{{2}}{
+{\rm e}^{q_{{2}} \left( s-t \right) }}+{{\rm e}^{q_{{1}} \left( s-t
+ \right) }}p_{{1}}}{{k}^{2}}}\end {array} \right]
+\end{equation}
+
+Тут:
+
+\begin{equation}
+{k}=\sqrt {{a_{{1}}}^{2}-2\,a_{{1}}a_{{2}}+{a_{{2}}}^{2}+4\,b_{{1}}b_{{2}}}
+\end{equation}
+\begin{equation}
+q_{{1}}=1/2\,{k}+1/2\,a_{{1}}+1/2\,a_{{2}}
+\end{equation}
+\begin{equation}
+q_{{2}}=1/2\,{k}-1/2\,a_{{1}}-1/2\,a_{{2}}
+\end{equation}
+\begin{equation}
+p_{{1}}=1/2\,{k}-1/2\,a_{{1}}+1/2\,a_{{2}}
+\end{equation}
+\begin{equation}
+p_{{2}}=1/2\,{k}+1/2\,a_{{1}}-1/2\,a_{{2}}
+\end{equation}
+
+Знайдемо опорну функцію від $X(t, M_0)$:
+
+\begin{equation}
+c(X(t, M_0) , \psi) = c(M_0,\Theta^* (t, t_0) \psi) +\int_{t_0}^t c(U(s), B^*(s) \Theta^* (t, s) \psi)\mathrm{d}s
+\end{equation}
+
+\begin{equation}
+c(M_0,\Theta^* (t, t_0) \psi) =
+\begin{cases}
+A_{{1}}N_{{1}}&0\leq A_{{1}}\cr 0&A_{{1}}<0\cr
+\end{cases}
++
+\begin{cases}
+A_{{2}}N_{{2}}&0\leq A_{{2}}\cr 0&A_{{2}}<0\cr
+\end{cases}
+\end{equation}
+
+
+\begin{equation}
+A_{{1}}=A_{{1,1}}\psi_{{1}}-A_{{1,2}}\psi_{{2}}
+\end{equation}
+
+\begin{equation}
+A_{{2}}=-A_{{2,1}}\psi_{{1}}+A_{{2,2}}\psi_{{2}}
+\end{equation}
+
+\begin{equation}
+A_{{1,1}}={\frac {p_{{2}}{{\rm e}^{-Ta_{{1}}}}+{{\rm e}^{Ta_{{2}}}}p_{{1}}}{k}}
+\end{equation}
+
+\begin{equation}
+A_{{1,2}}=-{\frac {p_{{1}}p_{{2}} \left( {{\rm e}^{-Ta_{{1}}}}-{
+{\rm e}^{Ta_{{2}}}} \right) }{kb_{{2}}}}
+\end{equation}
+
+\begin{equation}
+A_{{2,1}}=-{\frac {b_{{2}} \left( {{\rm e}^{-Ta_{{1}}}}-{{\rm e}^{Ta_{
+{2}}}} \right) }{k}}
+\end{equation}
+
+\begin{equation}
+A_{{2,2}}={\frac {{{\rm e}^{-Ta_{{1}}}}p_{{1}}+{{\rm e}^{Ta_{{2}}}}p_{
+{2}}}{k}}
+\end{equation}
+
+\begin{equation}
+c( U(s), B^*(s) \Theta^* (t, s) \psi)=|B_1|*h_1+|B_2|*h_2
+\end{equation}
+
+\begin{equation}
+B_{{1}}=B_{{1,1}}\psi_{{1}}-B_{{1,2}}\psi_{{2}}
+\end{equation}
+\begin{equation}
+B_{{2}}=-B_{{2,1}}\psi_{{1}}+B_{{2,2}}\psi_{{2}}
+\end{equation}
+\begin{equation}
+B_{{1,1}}={\frac {{{\rm e}^{a_{{2}} \left( -s+T \right) }}p_{{1}}+{
+{\rm e}^{-a_{{1}} \left( -s+T \right) }}p_{{2}}}{k}}
+\end{equation}
+\begin{equation}
+B_{{1,2}}=-{\frac {p_{{1}}p_{{2}} \left( -{{\rm e}^{a_{{2}} \left( -s+
+T \right) }}+{{\rm e}^{-a_{{1}} \left( -s+T \right) }} \right) }{kb_{{
+2}}}}
+\end{equation}
+\begin{equation}
+B_{{2,1}}={\frac {b_{{2}} \left( {{\rm e}^{a_{{2}} \left( -s+T
+ \right) }}-{{\rm e}^{-a_{{1}} \left( -s+T \right) }} \right) }{k}}
+\end{equation}
+\begin{equation}
+B_{{2,2}}={\frac {{{\rm e}^{a_{{2}} \left( -s+T \right) }}p_{{2}}+{
+{\rm e}^{-a_{{1}} \left( -s+T \right) }}p_{{1}}}{k}}
+\end{equation}
+
+Тоді опорна функція від множини досяжності:
+\begin{equation}
+c(X(t, M_0) , \psi) =
+\begin{cases}
+A_{{1}}N_{{1}}&0\leq A_{{1}}\cr 0&A_{{1}}<0\cr
+\end{cases}
++
+\begin{cases}
+A_{{2}}N_{{2}}&0\leq A_{{2}}\cr 0&A_{{2}}<0\cr
+\end{cases}
++h_1\cdot\int_{t_0}^t |B_1(s)|\mathrm{d}s +h_2\cdot\int_{t_0}^t|B_2(s)| \mathrm{d}s
+\end{equation}
+
+Складність у подальшому обчисленні представляють інтеграли: $\int_{t_0}^t |B_1(s)|\mathrm{d}s$ та $\int_{t_0}^t|B_2(s)| \mathrm{d}s$
+
+Зауважимо, що всі чисельні змінні додатні.
+
+\section{Опис алгоритму}
+
+\begin{equation}
+{k}=\sqrt {{a_{{1}}}^{2}-2\,a_{{1}}a_{{2}}+{a_{{2}}}^{2}+4\,b_{{1}}b_{{2}}}
+\end{equation}
+\begin{equation}
+q_{{1}}=1/2\,{k}+1/2\,a_{{1}}+1/2\,a_{{2}}
+\end{equation}
+\begin{equation}
+q_{{2}}=1/2\,{k}-1/2\,a_{{1}}-1/2\,a_{{2}}
+\end{equation}
+\begin{equation}
+p_{{1}}=1/2\,{k}-1/2\,a_{{1}}+1/2\,a_{{2}}
+\end{equation}
+\begin{equation}
+p_{{2}}=1/2\,{k}+1/2\,a_{{1}}-1/2\,a_{{2}}
+\end{equation}
+
+%\begin{equation}
+%A_{{1}}=A_{{1,1}}\psi_{{1}}-A_{{1,2}}\psi_{{2}}
+%\end{equation}
+
+%\begin{equation}
+%A_{{2}}=-A_{{2,1}}\psi_{{1}}+A_{{2,2}}\psi_{{2}}
+%\end{equation}
+
+\begin{equation}
+A_{{1,1}}={\frac {p_{{2}}{{\rm e}^{-Ta_{{1}}}}+{{\rm e}^{Ta_{{2}}}}p_{{1}}}{k}}
+\end{equation}
+
+\begin{equation}
+A_{{1,2}}=-{\frac {p_{{1}}p_{{2}} \left( {{\rm e}^{-Ta_{{1}}}}-{
+{\rm e}^{Ta_{{2}}}} \right) }{kb_{{2}}}}
+\end{equation}
+
+\begin{equation}
+A_{{2,1}}=-{\frac {b_{{2}} \left( {{\rm e}^{-Ta_{{1}}}}-{{\rm e}^{Ta_{
+{2}}}} \right) }{k}}
+\end{equation}
+
+\begin{equation}
+A_{{2,2}}={\frac {{{\rm e}^{-Ta_{{1}}}}p_{{1}}+{{\rm e}^{Ta_{{2}}}}p_{
+{2}}}{k}}
+\end{equation}
+
+
+
+%\begin{equation}
+%B_{{1}}=B_{{1,1}}\psi_{{1}}-B_{{1,2}}\psi_{{2}}
+%\end{equation}
+%\begin{equation}
+%B_{{2}}=-B_{{2,1}}\psi_{{1}}+B_{{2,2}}\psi_{{2}}
+%\end{equation}
+\begin{equation}
+B_{{1,1}}={\frac {{{\rm e}^{a_{{2}} \left( -s+T \right) }}p_{{1}}+{
+{\rm e}^{-a_{{1}} \left( -s+T \right) }}p_{{2}}}{k}}
+\end{equation}
+\begin{equation}
+B_{{1,2}}=-{\frac {p_{{1}}p_{{2}} \left( -{{\rm e}^{a_{{2}} \left( -s+
+T \right) }}+{{\rm e}^{-a_{{1}} \left( -s+T \right) }} \right) }{kb_{{
+2}}}}
+\end{equation}
+\begin{equation}
+B_{{2,1}}={\frac {b_{{2}} \left( {{\rm e}^{a_{{2}} \left( -s+T
+ \right) }}-{{\rm e}^{-a_{{1}} \left( -s+T \right) }} \right) }{k}}
+\end{equation}
+\begin{equation}
+B_{{2,2}}={\frac {{{\rm e}^{a_{{2}} \left( -s+T \right) }}p_{{2}}+{
+{\rm e}^{-a_{{1}} \left( -s+T \right) }}p_{{1}}}{k}}
+\end{equation}
+\section{Опис програми}
+
+Програма послідовно рахує коефіцієнти
+
+\section{Опис обчислювальних експериментiв}
+
+Для моделюваняя множини досяжності вирішувалась поставленна задача з константними керуючими функціями. Як результат був отриманий паралелограм. Задачі вирішувалися окремо з дискретним кроком. Точки досяжності візуалізуються на площині (див. додаток).
+
+\section{Висновки}
+
+Досить складно обрахувати інтеграл від модуля функції довільної структури.
+
+Розв'язок при $ lim t -> \inf $ не залежить від початкового стану.
+
+Якщо вирішувати задачу тільки коли змінні додатні, це не тривіальна задача та не має аналітичного розв'язку.
+
+\section{Лiтература}
+
+\end{document}
