@@ -1,18 +1,99 @@
-\documentclass{article}
-\usepackage[ukrainian,english]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage[T2A]{fontenc}
-\usepackage{amsmath}
+%\documentclass{article}
+%\usepackage[ukrainian,english]{babel}
+%\usepackage[utf8]{inputenc}
+%\usepackage[T2A]{fontenc}
+%\usepackage{amsmath}
 
-\title{Експериментальна робота №5 \\
-з курсу „Теорiя керування” \\
-студента 3-го курсу групи ОМ \\
-Гаврилка Євгенія}
-\date{2017-05-26}
+%\title{Експериментальна робота №5 \\
+%з курсу „Теорiя керування” \\
+%студента 3-го курсу групи ОМ \\
+%Гаврилка Євгенія}
+%\date{2017-05-26}
 %\author{Гаврилко Євгеній}
+
+\documentclass[fontsize=14pt,DIV=1,a4paper]{scrartcl} 
+\usepackage[utf8]{inputenc}
+\usepackage{cmap} % для кодировки шрифтов в pdf
+\usepackage[T2A]{fontenc}
+%\usepackage{fontspec}
+%\usepackage{polyglossia}
+%\setmainfont{Times New Roman}
+%\newfontfamily\cyrillicfont{Times New Roman}
+%\usepackage{mathptmx}
+%\renewcommand{\rmdefault}{ftm} % Times New Roman
+\linespread{1.3} % полуторный интервал
+\frenchspacing
+\usepackage[english,russian,ukrainian]{babel}
+\usepackage{indentfirst}
+\usepackage{misccorr}
+\usepackage{graphicx}
+\usepackage[left=3cm,right=1.5cm,top=2cm,bottom=2cm,includefoot]{geometry}
+\usepackage{graphicx}% для вставки картинок
+%\graphicspath{ {/home/zeka/github.com/ZzEeKkAa/fuzzy-logic/} }
+\graphicspath{ {/home/zeka/cursach/} }
+
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+\usepackage{makecell}
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{ulem} % подчеркивания
+\usepackage{gensymb}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,      
+    urlcolor=black,
+}
+
+\makeatletter
+\DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
+\DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf}
+\DeclareOldFontCommand{\tt}{\normalfont\ttfamily}{\mathtt}
+\DeclareOldFontCommand{\bf}{\normalfont\bfseries}{\mathbf}
+\DeclareOldFontCommand{\it}{\normalfont\itshape}{\mathit}
+\DeclareOldFontCommand{\sl}{\normalfont\slshape}{\@nomath\sl}
+\DeclareOldFontCommand{\sc}{\normalfont\scshape}{\@nomath\sc}
+\makeatother
+
+
 \begin{document}
 
-\maketitle
+\begin{titlepage}
+		\begin{center}
+			\large
+			\textbf{КИЇВСЬКИЙ НАЦІОНАЛЬНИЙ УНІВЕРСИТЕТ \\
+			ІМЕНІ ТАРАСА ШЕВЧЕНКА}
+
+			\textbf{Кафедра обчислювальної математики}
+			
+			\vspace{6.0cm}
+
+			\textsc{
+			Експериментальна робота №5 \\ з курсу „Теорiя керування”}\\
+			На тему:
+
+			\textbf{ Модель бойових дiй двох армiй}
+			\bigskip
+		\end{center}
+		\vfill
+
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			студента 3-го курсу групи ОМ \\
+			Гаврилка Євгенія
+		\end{minipage}%
+		\vfill
+
+		\begin{center}
+			Київ – 2017
+		\end{center}
+	\end{titlepage}
+	
+	\tableofcontents
+
+%\maketitle
 \newpage
 \section{Опис математичної моделi i постановка задачi}
 \subsection{Модель бойових дiй двох армiй}
@@ -128,95 +209,98 @@ p_{{1}}=1/2\,{k}-1/2\,a_{{1}}+1/2\,a_{{2}}
 p_{{2}}=1/2\,{k}+1/2\,a_{{1}}-1/2\,a_{{2}}
 \end{equation}
 
-Знайдемо опорну функцію від $X(t, M_0)$:
+Зауважимо, що діагональні елементи фундаментальної матриці додадтні, а інші - від'ємні
+
+Знайдемо множину досяжності $X(t, M_0)$:
 
 \begin{equation}
-c(X(t, M_0) , \psi) = c(M_0,\Theta^* (t, t_0) \psi) +\int_{t_0}^t c(U(s), B^*(s) \Theta^* (t, s) \psi)\mathrm{d}s
+X(t, M_0) = \bigcup_{x \in M_0} \bigcup_{u(t) \in U(t)} \Theta (T, 0)\cdot x_0 +\int_{0}^T \Theta (T, s) \cdot B(s)\cdot u(s) \mathrm{d}s
 \end{equation}
 
-\begin{equation}
-c(M_0,\Theta^* (t, t_0) \psi) =
-\begin{cases}
-A_{{1}}N_{{1}}&0\leq A_{{1}}\cr 0&A_{{1}}<0\cr
-\end{cases}
-+
-\begin{cases}
-A_{{2}}N_{{2}}&0\leq A_{{2}}\cr 0&A_{{2}}<0\cr
-\end{cases}
-\end{equation}
+Враховуючи, що кожен доданок залежить лише від однієї змінної об'єднання та $B(s)=\left[ \begin {array}{cc}
+{1}&{0}\\ \noalign{\medskip}
+{0}&{1}\end {array} \right]$:
 
 
 \begin{equation}
-A_{{1}}=A_{{1,1}}\psi_{{1}}-A_{{1,2}}\psi_{{2}}
+X(T, M_0) = \bigcup_{x \in M_0} \Theta (T, 0)\cdot x_0 + \bigcup_{u(t) \in U(t)} \int_{t_0}^T \Theta (T, s) \cdot u(s) \mathrm{d}s
 \end{equation}
 
+Розглянемо другий доданок: 
 \begin{equation}
-A_{{2}}=-A_{{2,1}}\psi_{{1}}+A_{{2,2}}\psi_{{2}}
+	\bigcup_{u(t) \in U(t)} \int_{0}^T \Theta (T, s) \cdot u(s) \mathrm{d}s = 
+	\bigcup_{|u_i(t)| \leq h_i} \int_{0}^T \left[ \begin {array}{cc}
+	{B_{1,1}(s)}&{B_{1,2}(s)}\\ \noalign{\medskip}
+	{B_{2,1}(s)}&{B_{2,2}(s)}\end {array} \right]\cdot \left[ \begin {array}{cc}
+	{u_{1}(s)}\\ \noalign{\medskip}
+	{u_{2}(s)}\end {array} \right] \mathrm{d}s
 \end{equation}
 
-\begin{equation}
-A_{{1,1}}={\frac {p_{{2}}{{\rm e}^{-Ta_{{1}}}}+{{\rm e}^{Ta_{{2}}}}p_{{1}}}{k}}
-\end{equation}
+Доведемо, що наклавши на умову $u_{i}$ що вона константа ми отримаэмо ту саму множину.
+
+Не обмежуючи загальності вважаємо, що $h_i=1$. Тоді розкрівши добуток і розглядаючи пари доданків з фіксованим i, маэмо 2 інтеграли (додатній та відємний на всьому проміжку) $u_i(s)$ - задають лише на скільки зтиснути інтеграл. Таким чинном відношення пложин не змінюється, отже існує константа, така, що інтеграли мають таке саме значення.
+
+Тому можемо інтегрувати $B_{i,j}(s)$ окремо.
 
 \begin{equation}
-A_{{1,2}}=-{\frac {p_{{1}}p_{{2}} \left( {{\rm e}^{-Ta_{{1}}}}-{
-{\rm e}^{Ta_{{2}}}} \right) }{kb_{{2}}}}
+X(T, M_0) = 
+\bigcup_{0 \leq|x_{i,0}| \leq N_i}
+\left[ \begin {array}{cc}
+	{A_{1,1}}&{A_{1,2}}\\ \noalign{\medskip}
+	{A_{2,1}}&{A_{2,2}}\end {array} \right] \cdot
+\left[ \begin {array}{cc}
+	{x_{1,0}}\\ \noalign{\medskip}
+	{x_{2,0}}\end {array} \right]
++ 
+\bigcup_{|u_i| \leq h_i}
+\left[ \begin {array}{cc}
+	{B_{1,1}}&{B_{1,2}}\\ \noalign{\medskip}
+	{B_{2,1}}&{B_{2,2}}\end {array} \right] \cdot
+\left[ \begin {array}{cc}
+	{u_{1,0}}\\ \noalign{\medskip}
+	{u_{2,0}}\end {array} \right]
 \end{equation}
 
-\begin{equation}
-A_{{2,1}}=-{\frac {b_{{2}} \left( {{\rm e}^{-Ta_{{1}}}}-{{\rm e}^{Ta_{
-{2}}}} \right) }{k}}
-\end{equation}
 
 \begin{equation}
-A_{{2,2}}={\frac {{{\rm e}^{-Ta_{{1}}}}p_{{1}}+{{\rm e}^{Ta_{{2}}}}p_{
-{2}}}{k}}
+A_{{1,1}}={\frac {p_{{1}}{{\rm e}^{q_{{2}}T}}+p_{{2}}{{\rm e}
+^{-q_{{1}}T}}}{k}}
+\end{equation}
+\begin{equation}
+A_{{1,2}}={\frac {b_{{2}} \left( -{{\rm e}^{q_{{2}}
+T}}+{{\rm e}^{-q_{{1}}T}} \right) }{k}}
+\end{equation}
+\begin{equation}
+A_{{2,1}}=-{\frac {p_{{1}}p_{{
+2}} \left( {{\rm e}^{q_{{2}}T}}-{{\rm e}^{-q_{{1}}T}} \right) }{kb_{{2
+}}}}
+\end{equation}
+\begin{equation}
+A_{{2,2}}={\frac {{{\rm e}^{q_{{2}}T}}p_{{2}}+{{\rm e}^{-q_{{1}}T
+}}p_{{1}}}{k}}
+\end{equation}
+\begin{equation}
+B_{{1,1}}={\frac {p_{{1}}{{\rm e}^{q_{{2}}T}}q_{{1}}-p_
+{{2}}{{\rm e}^{-q_{{1}}T}}q_{{2}}-p_{{1}}q_{{1}}+p_{{2}}q_{{2}}}{kq_{{
+2}}q_{{1}}}}
+\end{equation}
+\begin{equation}
+B_{{1,2}}=-{\frac {b_{{2}} \left( {{\rm e}^{q_{{2}}T}}q_{
+{1}}+{{\rm e}^{-q_{{1}}T}}q_{{2}}-q_{{1}}-q_{{2}} \right) }{kq_{{2}}q_
+{{1}}}}
+\end{equation}
+\begin{equation}
+B_{{2,1}}=-{\frac {p_{{1}}p_{{2}} \left( {{\rm e}^{q_{{2}}T}}q
+_{{1}}+{{\rm e}^{-q_{{1}}T}}q_{{2}}-q_{{1}}-q_{{2}} \right) }{kb_{{2}}
+q_{{2}}q_{{1}}}}
+\end{equation}
+\begin{equation}
+B_{{2,2}}={\frac {p_{{2}}{{\rm e}^{q_{{2}}T}}q_{{1}}-
+p_{{1}}{{\rm e}^{-q_{{1}}T}}q_{{2}}+p_{{1}}q_{{2}}-p_{{2}}q_{{1}}}{kq_
+{{2}}q_{{1}}}}
 \end{equation}
 
-\begin{equation}
-c( U(s), B^*(s) \Theta^* (t, s) \psi)=|B_1|*h_1+|B_2|*h_2
-\end{equation}
-
-\begin{equation}
-B_{{1}}=B_{{1,1}}\psi_{{1}}-B_{{1,2}}\psi_{{2}}
-\end{equation}
-\begin{equation}
-B_{{2}}=-B_{{2,1}}\psi_{{1}}+B_{{2,2}}\psi_{{2}}
-\end{equation}
-\begin{equation}
-B_{{1,1}}={\frac {{{\rm e}^{a_{{2}} \left( -s+T \right) }}p_{{1}}+{
-{\rm e}^{-a_{{1}} \left( -s+T \right) }}p_{{2}}}{k}}
-\end{equation}
-\begin{equation}
-B_{{1,2}}=-{\frac {p_{{1}}p_{{2}} \left( -{{\rm e}^{a_{{2}} \left( -s+
-T \right) }}+{{\rm e}^{-a_{{1}} \left( -s+T \right) }} \right) }{kb_{{
-2}}}}
-\end{equation}
-\begin{equation}
-B_{{2,1}}={\frac {b_{{2}} \left( {{\rm e}^{a_{{2}} \left( -s+T
- \right) }}-{{\rm e}^{-a_{{1}} \left( -s+T \right) }} \right) }{k}}
-\end{equation}
-\begin{equation}
-B_{{2,2}}={\frac {{{\rm e}^{a_{{2}} \left( -s+T \right) }}p_{{2}}+{
-{\rm e}^{-a_{{1}} \left( -s+T \right) }}p_{{1}}}{k}}
-\end{equation}
-
-Тоді опорна функція від множини досяжності:
-\begin{equation}
-c(X(t, M_0) , \psi) =
-\begin{cases}
-A_{{1}}N_{{1}}&0\leq A_{{1}}\cr 0&A_{{1}}<0\cr
-\end{cases}
-+
-\begin{cases}
-A_{{2}}N_{{2}}&0\leq A_{{2}}\cr 0&A_{{2}}<0\cr
-\end{cases}
-+h_1\cdot\int_{t_0}^t |B_1(s)|\mathrm{d}s +h_2\cdot\int_{t_0}^t|B_2(s)| \mathrm{d}s
-\end{equation}
-
-Складність у подальшому обчисленні представляють інтеграли: $\int_{t_0}^t |B_1(s)|\mathrm{d}s$ та $\int_{t_0}^t|B_2(s)| \mathrm{d}s$
-
-Зауважимо, що всі чисельні змінні додатні.
+Як бачимо, ми маємо сумму 2х параллелограмів. Враховуючи що сумма опуклих є опуклою, нам залишається знайти опуклу оболонку точок, що утворюються сумами вершин паралеллограмів. Їх всього 16.
 
 \section{Опис алгоритму}
 
@@ -236,74 +320,78 @@ p_{{1}}=1/2\,{k}-1/2\,a_{{1}}+1/2\,a_{{2}}
 p_{{2}}=1/2\,{k}+1/2\,a_{{1}}-1/2\,a_{{2}}
 \end{equation}
 
-%\begin{equation}
-%A_{{1}}=A_{{1,1}}\psi_{{1}}-A_{{1,2}}\psi_{{2}}
-%\end{equation}
-
-%\begin{equation}
-%A_{{2}}=-A_{{2,1}}\psi_{{1}}+A_{{2,2}}\psi_{{2}}
-%\end{equation}
-
 \begin{equation}
-A_{{1,1}}={\frac {p_{{2}}{{\rm e}^{-Ta_{{1}}}}+{{\rm e}^{Ta_{{2}}}}p_{{1}}}{k}}
-\end{equation}
-
-\begin{equation}
-A_{{1,2}}=-{\frac {p_{{1}}p_{{2}} \left( {{\rm e}^{-Ta_{{1}}}}-{
-{\rm e}^{Ta_{{2}}}} \right) }{kb_{{2}}}}
-\end{equation}
-
-\begin{equation}
-A_{{2,1}}=-{\frac {b_{{2}} \left( {{\rm e}^{-Ta_{{1}}}}-{{\rm e}^{Ta_{
-{2}}}} \right) }{k}}
-\end{equation}
-
-\begin{equation}
-A_{{2,2}}={\frac {{{\rm e}^{-Ta_{{1}}}}p_{{1}}+{{\rm e}^{Ta_{{2}}}}p_{
-{2}}}{k}}
-\end{equation}
-
-
-
-%\begin{equation}
-%B_{{1}}=B_{{1,1}}\psi_{{1}}-B_{{1,2}}\psi_{{2}}
-%\end{equation}
-%\begin{equation}
-%B_{{2}}=-B_{{2,1}}\psi_{{1}}+B_{{2,2}}\psi_{{2}}
-%\end{equation}
-\begin{equation}
-B_{{1,1}}={\frac {{{\rm e}^{a_{{2}} \left( -s+T \right) }}p_{{1}}+{
-{\rm e}^{-a_{{1}} \left( -s+T \right) }}p_{{2}}}{k}}
+A_{{1,1}}={\frac {p_{{1}}{{\rm e}^{q_{{2}}T}}+p_{{2}}{{\rm e}
+^{-q_{{1}}T}}}{k}}
 \end{equation}
 \begin{equation}
-B_{{1,2}}=-{\frac {p_{{1}}p_{{2}} \left( -{{\rm e}^{a_{{2}} \left( -s+
-T \right) }}+{{\rm e}^{-a_{{1}} \left( -s+T \right) }} \right) }{kb_{{
-2}}}}
+A_{{1,2}}={\frac {b_{{2}} \left( -{{\rm e}^{q_{{2}}
+T}}+{{\rm e}^{-q_{{1}}T}} \right) }{k}}
 \end{equation}
 \begin{equation}
-B_{{2,1}}={\frac {b_{{2}} \left( {{\rm e}^{a_{{2}} \left( -s+T
- \right) }}-{{\rm e}^{-a_{{1}} \left( -s+T \right) }} \right) }{k}}
+A_{{2,1}}=-{\frac {p_{{1}}p_{{
+2}} \left( {{\rm e}^{q_{{2}}T}}-{{\rm e}^{-q_{{1}}T}} \right) }{kb_{{2
+}}}}
 \end{equation}
 \begin{equation}
-B_{{2,2}}={\frac {{{\rm e}^{a_{{2}} \left( -s+T \right) }}p_{{2}}+{
-{\rm e}^{-a_{{1}} \left( -s+T \right) }}p_{{1}}}{k}}
+A_{{2,2}}={\frac {{{\rm e}^{q_{{2}}T}}p_{{2}}+{{\rm e}^{-q_{{1}}T
+}}p_{{1}}}{k}}
 \end{equation}
+\begin{equation}
+B_{{1,1}}={\frac {p_{{1}}{{\rm e}^{q_{{2}}T}}q_{{1}}-p_
+{{2}}{{\rm e}^{-q_{{1}}T}}q_{{2}}-p_{{1}}q_{{1}}+p_{{2}}q_{{2}}}{kq_{{
+2}}q_{{1}}}}
+\end{equation}
+\begin{equation}
+B_{{1,2}}=-{\frac {b_{{2}} \left( {{\rm e}^{q_{{2}}T}}q_{
+{1}}+{{\rm e}^{-q_{{1}}T}}q_{{2}}-q_{{1}}-q_{{2}} \right) }{kq_{{2}}q_
+{{1}}}}
+\end{equation}
+\begin{equation}
+B_{{2,1}}=-{\frac {p_{{1}}p_{{2}} \left( {{\rm e}^{q_{{2}}T}}q
+_{{1}}+{{\rm e}^{-q_{{1}}T}}q_{{2}}-q_{{1}}-q_{{2}} \right) }{kb_{{2}}
+q_{{2}}q_{{1}}}}
+\end{equation}
+\begin{equation}
+B_{{2,2}}={\frac {p_{{2}}{{\rm e}^{q_{{2}}T}}q_{{1}}-
+p_{{1}}{{\rm e}^{-q_{{1}}T}}q_{{2}}+p_{{1}}q_{{2}}-p_{{2}}q_{{1}}}{kq_
+{{2}}q_{{1}}}}
+\end{equation}
+
+Знайти 4 точки, для $x=0,N_1$; $y=0,N_2$:
+\begin{equation}
+[A_{1,1}\cdot x+A_{1,2}\cdot y,A_{2,1}\cdot x+A_{2,2}\cdot y]
+\end{equation}
+Знайти 4 точки, для $x=-h_1,h_1$; $y=-h_2,h_2$:
+\begin{equation}
+[B_{1,1}\cdot x+B_{1,2}\cdot y,B_{2,1}\cdot x+B_{2,2}\cdot y]
+\end{equation}
+
+Попарно просумувати і отримати 16 точок.
+Знайти їх опуклу оболонку, що складається з 8 точок.
+
 \section{Опис програми}
 
-Програма послідовно рахує коефіцієнти
+Програма послідовно рахує коефіцієнти. Опуклу оболонку за алгоритмом.
 
 \section{Опис обчислювальних експериментiв}
 
-Для моделюваняя множини досяжності вирішувалась поставленна задача з константними керуючими функціями. Як результат був отриманий паралелограм. Задачі вирішувалися окремо з дискретним кроком. Точки досяжності візуалізуються на площині (див. додаток).
+Для моделюваняя множини досяжності вирішувалась поставленна задача з константними керуючими функціями та періодичними. Як результат був отриманий 8 кутник. Задачі вирішувалися окремо з дискретним кроком. Точки досяжності візуалізуються на площині (див. додаток).
 
 \section{Висновки}
 
-Досить складно обрахувати інтеграл від модуля функції довільної структури.
+Керування однаково змінює множину досяжності не залежно від початкового стану.
 
-Розв'язок при $ lim t -> \inf $ не залежить від початкового стану.
-
-Якщо вирішувати задачу тільки коли змінні додатні, це не тривіальна задача та не має аналітичного розв'язку.
-
-\section{Лiтература}
-
+Сумма 2-х параллелограмів - 8 кутник з параллельними протилежними сторонами.
+	
+	\newpage
+	\addcontentsline{toc}{section}{Література}
+	\begin{thebibliography}{9}
+		\bibitem{control_theory}
+		Лекцiї з теорiї керування. Пiчкур В.В.
+		\bibitem{convex_hull}
+		\url{https://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain}
+		\bibitem{golang}
+		\url{https://golang.org/}
+	\end{thebibliography}
 \end{document}
